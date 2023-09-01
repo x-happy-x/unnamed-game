@@ -1,0 +1,15 @@
+version: 51
+levels: 6
+level1Name: 1 УРОВЕНЬ
+level2Name: 2 УРОВЕНЬ
+level3Name: 3 УРОВЕНЬ
+level4Name: 4 УРОВЕНЬ
+level5Name: 5 УРОВЕНЬ
+level6Name: Тестовый уровень
+level0Path: menu
+level1Path: levels/GuessTheCartoon
+level2Path: levels/MusicLevel
+level3Path: levels/Aesthetics
+level4Path: levels/Aesthetics
+level5Path: levels/Aesthetics
+level6Path: levels/Test

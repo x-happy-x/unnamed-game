@@ -1,0 +1,20 @@
+view:
+  - id: "dog"
+    align_vertical: "bottom"
+    align_horizontal: "center"
+    x: "0wp"
+    y: "0wp"
+    width: "auto"
+    height: "80wp"
+    padding: "0wp"
+    margin: "0wp"
+id: progressbar
+centerx: true
+bottom: 15
+width: 65
+color: #E91E63
+
+id: dog
+centerx: true
+bottom: 0
+height: 80

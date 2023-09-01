@@ -1,0 +1,17 @@
+classLoad: "Test"
+
+resources:
+
+  - group: "loadscreen"
+    files:
+      - name: "load"
+        path: "loadscreen/load.resources"
+        type: "TA"
+        preload: true
+
+  - group: "level"
+    files:
+      - name: "background"
+        path: "{% level %}/bg.png"
+        type: "T"
+        preload: true

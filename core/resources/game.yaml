@@ -1,0 +1,20 @@
+version: 1
+channel: canary
+
+levels:
+    - name: "Тест"
+      path: "{% levels %}/Aesthetics"
+
+# Директории
+paths:
+  # Ресурсов
+  resources: "resources/"
+  textures: "{% resources %}/textures/"
+  strings: "{% resources %}/strings/"
+  shaders: "{% resources %}/shaders/"
+  sounds: "{% resources %}/sounds/"
+  musics: "{% resources %}/musics/"
+  fonts: "{% resources %}/fonts/"
+  # Уровней
+  levels: "levels/"
+  previews: "{% textures %}/previews/"

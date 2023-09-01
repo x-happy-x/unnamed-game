@@ -1,0 +1,11 @@
+sourceCompatibility = JavaVersion.VERSION_17
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
+}
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+sourceSets.main.java.srcDirs = [ "src/" ]
+sourceSets.test.java.srcDirs = [ "test/" ]
+sourceSets.main.resources.srcDirs = [ "resources/" ]
+
+eclipse.project.name = appName + "-core"

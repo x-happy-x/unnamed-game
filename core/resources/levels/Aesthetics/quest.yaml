@@ -1,0 +1,97 @@
+questions:
+
+
+  - question: "Вы хорошо знаете мультики?"
+    answers:
+
+      - text: "Конееееееееееееечно (нет)"
+        type: "question"
+        value: "2"
+
+      - text: "Конечно"
+        type: "question"
+        value: "1"
+
+
+  - question: "Сможете ли угадать их по музыке?"
+    answers:
+
+      - text: "Не думаю"
+        type: "question"
+        value: "2"
+
+      - text: "А то"
+        type: "game"
+        value: "0"
+
+
+  - question: "А угадать фильмы по музыке можете? А? А? ААААА?"
+    answers:
+
+      - text: "Неа"
+        type: "question"
+        value: "3"
+
+      - text: "Дааааа"
+        type: "game"
+        value: "1"
+
+
+  - question: "Хмммм, а современную музыку хоть знаете?"
+    answers:
+
+      - text: "Не угу"
+        type: "question"
+        value: "4"
+
+      - text: "Угу"
+        type: "game"
+        value: "2019-3000"
+
+
+  - question: "Нууу тогда выбирайте сами"
+    answers:
+
+      - text: "с 2011 по 2014"
+        type: "game-y"
+        value: "2011-2014"
+
+      - text: "с 2007 по 2010"
+        type: "game-y"
+        value: "2007-2010"
+
+      - text: "с 2003 по 2006"
+        type: "game-y"
+        value: "2003-2006"
+
+      - text: "с 2015 по 2018"
+        type: "game-y"
+        value: "2015-2018"
+
+      - text: "с 1999 по 2002"
+        type: "game-y"
+        value: "1999-2002"
+
+      - text: "с 1995 по 1998"
+        type: "game-y"
+        value: "1995-1998"
+
+      - text: "с 1990 по 1994"
+        type: "game-y"
+        value: "1990-1994"
+
+      - text: "Не знаю :("
+        type: "question"
+        value: "5"
+
+
+  - question: "Аааааааааааа ну пожалуйста скажите что знаете хотя бы классику"
+    answers:
+
+      - text: "Плак плак (заново)"
+        type: "question"
+        value: "0"
+
+      - text: "Ооо, это по мне"
+        type: "game"
+        value: "2"
