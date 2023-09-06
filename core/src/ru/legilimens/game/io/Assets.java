@@ -3,32 +3,29 @@ package ru.legilimens.game.io;
 import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.assets.AssetManager;
 
+import ru.legilimens.game.Context;
 import ru.legilimens.game.math.Progress;
 import ru.legilimens.game.math.ProgressSmoothImpl;
-import ru.legilimens.game.utils.LevelsControl;
+import ru.legilimens.game.utils.level.LevelManager;
 
 public class Assets {
 
-    private AssetManager manager;
-    private Resources resources;
-    private Progress progress;
+    private final AssetManager manager;
+    private final Resources resources;
+    private final Progress progress;
 
-    private Assets() {
+    private final PathManager mPath = Context.mPath;
+    private final LevelManager mLevel = Context.mLevel;
+
+    public Assets(Resources resources) {
+        this.resources = resources;
+
         manager = new AssetManager(new ExtFileHandleResolver());
-        resources = Resources.getInstance();
         progress = new ProgressSmoothImpl();
     }
 
-    private static final class Holder {
-        private static final Assets INSTANCE = new Assets();
-    }
-
-    public static Assets getInstance() {
-        return Holder.INSTANCE;
-    }
-
     public String getLevelContent(String file) {
-        return Files.read(PathManager.levelPath() + "/" + file);
+        return Files.read(mPath.levelPath() + "/" + file);
     }
 
     public String getContent(String file) {
@@ -41,7 +38,7 @@ public class Assets {
     }
 
     public void loadAll() {
-        int level = LevelsControl.getLevel();
+        int level = mLevel.getLevel();
         if (level >= 0) {
             resources.getFiles(level).forEach(file ->
                     manager.load(resources.get(level, file))

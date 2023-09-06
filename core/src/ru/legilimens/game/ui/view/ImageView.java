@@ -2,24 +2,23 @@ package ru.legilimens.game.ui.view;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import ru.legilimens.game.Context;
 import ru.legilimens.game.math.shape.Rectangle;
-import ru.legilimens.game.utils.render.ViewRenderer;
 
-public class ImageView implements IView {
+public class ImageView extends View {
 
-    private TextureRegion textureRegion;
-    private Rectangle textureRectangle;
+    private final TextureRegion textureRegion;
+    private final Rectangle textureRectangle;
+
+    @Setter
+    @Getter
     private float radius;
 
-
-    private boolean enabled;
-    private boolean visible;
-
-    private Rectangle position;
-
-    private final ViewRenderer renderer;
-
-    public ImageView(TextureRegion textureRegion) {
+    public ImageView(Context context, TextureRegion textureRegion) {
+        super(context);
         this.textureRegion = textureRegion;
         this.textureRectangle = new Rectangle(
                 textureRegion.getRegionX(),
@@ -27,13 +26,7 @@ public class ImageView implements IView {
                 textureRegion.getRegionHeight(),
                 textureRegion.getRegionWidth()
         );
-        this.radius = 10f;
-
-        this.position = new Rectangle();
-        this.enabled = true;
-        this.visible = true;
-
-        this.renderer = ViewRenderer.getInstance();
+        this.radius = 0f;
     }
 
     private ImageView setRegion(float x, float y, float width, float height) {
@@ -55,7 +48,7 @@ public class ImageView implements IView {
                     textureRectangle.width / 2f,
                     textureRectangle.height / 2f
             );
-            renderer.draw(
+            viewRenderer.draw(
                     textureRegion,
                     position.x,
                     position.y + position.height - radius,
@@ -70,7 +63,7 @@ public class ImageView implements IView {
                     2,
                     textureRectangle.height / 2f
             );
-            renderer.draw(
+            viewRenderer.draw(
                     textureRegion,
                     position.x + radius,
                     position.y + position.height - radius,
@@ -85,7 +78,7 @@ public class ImageView implements IView {
                     textureRectangle.width / 2f,
                     textureRectangle.height / 2f
             );
-            renderer.draw(
+            viewRenderer.draw(
                     textureRegion,
                     position.x + position.width - radius,
                     position.y + position.height - radius,
@@ -100,7 +93,7 @@ public class ImageView implements IView {
                     textureRectangle.width / 2f,
                     textureRectangle.height / 2f
             );
-            renderer.draw(
+            viewRenderer.draw(
                     textureRegion,
                     position.x,
                     position.y,
@@ -115,7 +108,7 @@ public class ImageView implements IView {
                     2,
                     textureRectangle.height / 2f
             );
-            renderer.draw(
+            viewRenderer.draw(
                     textureRegion,
                     position.x + radius,
                     position.y,
@@ -130,7 +123,7 @@ public class ImageView implements IView {
                     textureRectangle.width / 2f,
                     textureRectangle.height / 2f
             );
-            renderer.draw(
+            viewRenderer.draw(
                     textureRegion,
                     position.x + position.width - radius,
                     position.y,
@@ -145,7 +138,7 @@ public class ImageView implements IView {
                     textureRectangle.width / 2f,
                     2
             );
-            renderer.draw(
+            viewRenderer.draw(
                     textureRegion,
                     position.x,
                     position.y + radius,
@@ -160,7 +153,7 @@ public class ImageView implements IView {
                     2,
                     2
             );
-            renderer.draw(
+            viewRenderer.draw(
                     textureRegion,
                     position.x + radius,
                     position.y + radius,
@@ -175,7 +168,7 @@ public class ImageView implements IView {
                     textureRectangle.width / 2f,
                     2
             );
-            renderer.draw(
+            viewRenderer.draw(
                     textureRegion,
                     position.x + position.width - radius,
                     position.y + radius,
@@ -183,86 +176,8 @@ public class ImageView implements IView {
                     position.height - radius * 2
             );
         } else {
-            renderer.draw(textureRegion, position);
+            viewRenderer.draw(textureRegion, position);
         }
         return setRegion(textureRectangle);
-    }
-
-    @Override
-    public boolean enabled() {
-        return enabled;
-    }
-
-    @Override
-    public boolean visible() {
-        return visible;
-    }
-
-    @Override
-    public IView setEnable(boolean enable) {
-        this.enabled = enable;
-        return this;
-    }
-
-    @Override
-    public IView setVisible(boolean visible) {
-        this.visible = visible;
-        return this;
-    }
-
-    @Override
-    public float getWidth() {
-        return position.getWidth();
-    }
-
-    @Override
-    public float getHeight() {
-        return position.getHeight();
-    }
-
-    @Override
-    public float getX() {
-        return position.getX();
-    }
-
-    @Override
-    public float getY() {
-        return position.getY();
-    }
-
-    @Override
-    public IView setWidth(float width) {
-        position.setWidth(width);
-        return this;
-    }
-
-    @Override
-    public IView setHeight(float height) {
-        position.setHeight(height);
-        return this;
-    }
-
-    @Override
-    public IView setX(float x) {
-        position.setX(x);
-        return this;
-    }
-
-    @Override
-    public IView setY(float y) {
-        position.setY(y);
-        return this;
-    }
-
-    @Override
-    public IView setPosition(float x, float y) {
-        position.setPosition(x, y);
-        return this;
-    }
-
-    @Override
-    public IView setSize(float width, float height) {
-        position.setSize(width, height);
-        return this;
     }
 }

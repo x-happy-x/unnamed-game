@@ -6,10 +6,9 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-public class Logger {
+public abstract class Logger {
 
     public static String APP_LOG_TAG = "GAME";
-    private Logger() {}
 
     private static Process logger;
 

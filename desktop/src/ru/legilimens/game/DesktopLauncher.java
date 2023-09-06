@@ -8,7 +8,8 @@ public class DesktopLauncher {
 	public static void main (String[] arg) {
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
 		config.setForegroundFPS(60);
+		config.setWindowedMode(1000,1000);
 		config.setTitle("UnnamedGame23");
-		new Lwjgl3Application(Game.getInstance(), config);
+		new Lwjgl3Application(new Game(), config);
 	}
 }

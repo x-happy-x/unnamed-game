@@ -16,6 +16,8 @@ import java.util.zip.ZipFile;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
+import ru.legilimens.game.Context;
+
 public class Files {
 
     /**
@@ -25,7 +27,7 @@ public class Files {
      * @return файл-хандлер
      */
     public static FileHandle getAbsoluteHandle(String path) {
-        return Gdx.files.absolute(PathManager.path(path));
+        return Gdx.files.absolute(Context.mPath.path(path));
     }
 
     /**
@@ -46,13 +48,18 @@ public class Files {
      * @return файл-хандлер
      */
     public static FileHandle getHandle(String path, com.badlogic.gdx.Files.FileType fileType) {
-        return switch (fileType) {
-            case Local -> Gdx.files.local(PathManager.path(path));
-            case Internal -> Gdx.files.internal(PathManager.path(path));
-            case External -> Gdx.files.external(PathManager.path(path));
-            case Classpath -> Gdx.files.classpath(PathManager.path(path));
-            default -> Gdx.files.absolute(PathManager.dataPath() + "/" + PathManager.path(path));
-        };
+        switch (fileType) {
+            case Local:
+                return Gdx.files.local(Context.mPath.path(path));
+            case Internal:
+                return Gdx.files.internal(Context.mPath.path(path));
+            case External:
+                return Gdx.files.external(Context.mPath.path(path));
+            case Classpath:
+                return Gdx.files.classpath(Context.mPath.path(path));
+            default:
+                return Gdx.files.absolute(Context.mPath.dataPath() + "/" + Context.mPath.path(path));
+        }
     }
 
     /**

@@ -2,20 +2,22 @@ package ru.legilimens.game.io;
 
 import com.badlogic.gdx.Gdx;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
 
+import ru.legilimens.game.Context;
 import ru.legilimens.game.resources.R;
-import ru.legilimens.game.utils.LevelsControl;
 import ru.legilimens.game.utils.Template;
+import ru.legilimens.game.utils.level.LevelManager;
 
-public abstract class PathManager {
+public class PathManager {
 
-    public static final Map<String, String> RESOURCES_PATHS = new HashMap<>();
+    private final Map<String, String> RESOURCES_PATHS;
+    private final LevelManager mLevel = Context.mLevel;
 
-    static {
+    public PathManager() {
+
+        RESOURCES_PATHS = new HashMap<>();
         RESOURCES_PATHS.put("resources", R.path.resources);
         RESOURCES_PATHS.put("textures", R.path.textures);
         RESOURCES_PATHS.put("strings", R.path.strings);
@@ -27,34 +29,37 @@ public abstract class PathManager {
         RESOURCES_PATHS.put("previews", R.path.previews);
     }
 
-    public static String path(String... paths) {
+    public String path(String... paths) {
         String path = String.join("/", paths);
         return Template.replace(path, RESOURCES_PATHS)
                 .replace("\\", "/")
                 .replace("//", "/");
     }
 
-    public static String dataPath() {
-        return switch (Gdx.app.getType()) {
-            case Android -> Gdx.files.getLocalStoragePath();
-            case Desktop -> "./";
-            default -> null;
-        };
+    public String dataPath() {
+        switch (Gdx.app.getType()) {
+            case Android:
+                return Gdx.files.getLocalStoragePath();
+            case Desktop:
+                return "./data/";
+            default:
+                return null;
+        }
     }
 
-    public static String levelPath(int level) {
-        return path(LevelsControl.getLevelInfo(level).getPath());
+    public String levelPath(int level) {
+        return path(mLevel.getLevelInfo(level).getPath());
     }
 
-    public static String levelPath() {
-        return path(LevelsControl.getLevelInfo().getPath());
+    public String levelPath() {
+        return path(mLevel.getLevelInfo().getPath());
     }
 
-    public static String levelInfoPath(int level) {
+    public String levelInfoPath(int level) {
         return levelPath(level) + "/main/level.yaml";
     }
 
-    public static String levelInfoPath() {
-        return levelInfoPath(LevelsControl.getLevel());
+    public String levelInfoPath() {
+        return levelInfoPath(mLevel.getLevel());
     }
 }

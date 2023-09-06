@@ -1,11 +1,13 @@
-sourceCompatibility = JavaVersion.VERSION_17
+sourceCompatibility = JavaVersion.VERSION_11
+targetCompatibility = JavaVersion.VERSION_11
+
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
 }
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
-sourceSets.main.java.srcDirs = [ "src/" ]
-sourceSets.test.java.srcDirs = [ "test/" ]
-sourceSets.main.resources.srcDirs = [ "resources/" ]
+sourceSets.main.java.srcDirs = ["src/"]
+sourceSets.test.java.srcDirs = ["test/"]
+sourceSets.main.resources.srcDirs = ["resources/"]
 
 eclipse.project.name = appName + "-core"

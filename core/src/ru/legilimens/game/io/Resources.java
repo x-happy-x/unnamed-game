@@ -11,9 +11,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import ru.legilimens.game.utils.LevelsControl;
+import ru.legilimens.game.Context;
+import ru.legilimens.game.utils.level.LevelManager;
 
 public class Resources {
+
+    private final PathManager mPath = Context.mPath;
+    private final LevelManager mLevel = Context.mLevel;
 
     Map<Integer, Map<String, String>> prop;
     Map<Integer, ArrayList<String>> levels;
@@ -23,21 +27,14 @@ public class Resources {
     Map<String, AssetDescriptor<Music>> musics;
     Map<String, AssetDescriptor<Sound>> sounds;
 
-    private static final class AssetsManagerHolder {
-        private static final Resources INSTANCE = new Resources();
-    }
-
-    public static Resources getInstance() {
-        return AssetsManagerHolder.INSTANCE;
-    }
-
-    private Resources() {
+    public Resources() {
         texture = new HashMap<>();
         levels = new HashMap<>();
         musics = new HashMap<>();
         sounds = new HashMap<>();
         atlas = new HashMap<>();
         fonts = new HashMap<>();
+
         prop = new HashMap<>();
     }
 
@@ -46,7 +43,7 @@ public class Resources {
     }
 
     public void setProperty(Integer level, String key, String value) {
-        if (!prop.containsKey(level)) prop.put(level, new HashMap<String,String>());
+        if (!prop.containsKey(level)) prop.put(level, new HashMap<>());
         prop.get(level).put(key, value);
     }
 
@@ -92,11 +89,11 @@ public class Resources {
 
     public void add(Integer level, String name, String path, String type) {
         if (!levels.containsKey(level))
-            levels.put(level, new ArrayList<String>());
+            levels.put(level, new ArrayList<>());
         levels.get(level).add(name);
-        path = PathManager.path(LevelsControl.getLevelInfo(level).getPath(), path);
+        path = mPath.path(mLevel.getLevelInfo(level).getPath(), path);
 
-        Logger.log("add",path);
+        Logger.log("add", path);
         if (type.equalsIgnoreCase("TA"))
             addAtlas(level + "_" + name, path);
         else if (type.equalsIgnoreCase("T"))
@@ -158,7 +155,7 @@ public class Resources {
     }
 
     public AssetDescriptor<?> get(String name, boolean isLevel) {
-        return isLevel ? get(LevelsControl.getLevel(), name) : getMain(name);
+        return isLevel ? get(mLevel.getLevel(), name) : getMain(name);
     }
 
     public AssetDescriptor<?> getMain(String name) {
@@ -175,8 +172,9 @@ public class Resources {
     }
 
     public void delete(String name, boolean level) {
-        String n = level ? LevelsControl.getLevel() + "_" + name : name;
-        levels.get(level ? LevelsControl.getLevel() : -1).remove(name);
+        int currentLevel = mLevel.getLevel();
+        String n = level ? currentLevel + "_" + name : name;
+        levels.get(level ? currentLevel : -1).remove(name);
         texture.remove(n);
         atlas.remove(n);
         musics.remove(n);
@@ -188,10 +186,19 @@ public class Resources {
         return getAtlas("0_graphic");
     }
 
+
+    /**
+     * Getting a list of names of resources at the specified level
+     * @param level the level for which to obtain resources
+     * @return a list of names
+     */
     public ArrayList<String> getFiles(int level) {
         return levels.get(level);
     }
 
+    /**
+     * Clear all resources
+     */
     public void clear() {
         prop.clear();
         atlas.clear();

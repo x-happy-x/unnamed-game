@@ -1,17 +1,19 @@
 package ru.legilimens.game.ui.screen;
 
-import com.badlogic.gdx.Screen;
-
-import ru.legilimens.game.Game;
+import ru.legilimens.game.Context;
 import ru.legilimens.game.io.Logger;
-import ru.legilimens.game.utils.ScreenManager;
 
-public class GameMenuScreen implements Screen {
+public class GameMenuScreen extends Screen {
+
+    public GameMenuScreen(Context context) {
+        super(context);
+    }
+
     @Override
     public void show() {
         Logger.log("GameMenuScreen", "show");
 
-        ScreenManager.getInstance().setScreen("GameLoadScreen");
+        context.mScreen.setScreen("GameLoadScreen");
     }
 
     @Override
@@ -21,7 +23,7 @@ public class GameMenuScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-        Logger.log("GameMenuScreen", "resize");
+        Logger.log("GameMenuScreen", "resize", width, height);
     }
 
     @Override

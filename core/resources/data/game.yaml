@@ -5,7 +5,7 @@ levels:
     - name: "Тест"
       path: "{% levels %}/Aesthetics"
 
-# Директории
+# Директории d
 paths:
   # Ресурсов
   resources: "resources/"
